@@ -65,20 +65,20 @@ fun Header() {
                 .padding(top = 8.dp)
         ) {
             textStyled(
-                text = listMovie.first().title,
+                text = listMovie.first().original_title,
                 color = Color.White,
                 style = MaterialTheme.typography.h4,
                 modifier = Modifier.padding(3.dp)
             )
             Spacer(modifier = Modifier.height(20.dp))
             textStyled(
-                text = listMovie.first().detail,
+                text = listMovie.first().title,
                 color = Color.White,
                 style = MaterialTheme.typography.subtitle1, modifier = Modifier.padding(3.dp)
             )
         }
         AsyncImage(
-            model = listMovie.first().image, contentDescription = "header",
+            model = listMovie.first().poster_path, contentDescription = "header",
             modifier = Modifier
                 .fillMaxHeight()
                 .align(Alignment.CenterVertically),
