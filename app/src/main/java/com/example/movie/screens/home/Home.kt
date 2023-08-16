@@ -18,6 +18,10 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,6 +30,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.movie.R
@@ -34,26 +39,28 @@ import com.example.movie.model.Movie
 import com.example.movie.model.getMovies
 
 @Composable
-fun Home(menuNavController: NavHostController) {
+fun Home(menuNavController: NavHostController, viewModel: MovieViewModel = hiltViewModel()) {
+    viewModel.getMovies()
+    val viewState by viewModel.viewState.collectAsState()
     Surface(
         modifier = Modifier
             .fillMaxSize(),
         color = MaterialTheme.colors.secondary
     ) {
         Column() {
-            Header()
+            Header(viewState.image,viewState.title,viewState.drama)
             Spacer(modifier = Modifier.height(30.dp))
-            MovieRow()
+            MovieRow(viewState.image,viewState.title,viewState.drama)
         }
     }
 
 
 }
 
-@Preview
 @Composable
-fun Header() {
-    val listMovie: List<Movie> = getMovies()
+fun Header(
+    image: String, title: String, drama: String
+) {
     Row(
         modifier = Modifier
             .fillMaxHeight(.3f)
@@ -65,20 +72,20 @@ fun Header() {
                 .padding(top = 8.dp)
         ) {
             textStyled(
-                text = listMovie.first().original_title,
+                text = title,
                 color = Color.White,
                 style = MaterialTheme.typography.h4,
                 modifier = Modifier.padding(3.dp)
             )
             Spacer(modifier = Modifier.height(20.dp))
             textStyled(
-                text = listMovie.first().title,
+                text = drama,
                 color = Color.White,
                 style = MaterialTheme.typography.subtitle1, modifier = Modifier.padding(3.dp)
             )
         }
         AsyncImage(
-            model = listMovie.first().poster_path, contentDescription = "header",
+            model = image, contentDescription = "header",
             modifier = Modifier
                 .fillMaxHeight()
                 .align(Alignment.CenterVertically),
@@ -89,14 +96,13 @@ fun Header() {
 
 
 @Composable
-fun MovieRow(onItemClick: (String) -> Unit = {}) {
-    val listMovie: List<Movie> = getMovies()
+fun MovieRow(image: String, title: String, drama: String, onItemClick: (String) -> Unit = {}) {
     LazyRow(
         modifier = Modifier
             .fillMaxWidth()
             .height(250.dp)
     ) {
-        items(listMovie) { information ->
+        items(18) {
             Card(
                 modifier = Modifier
                     .padding(8.dp)
@@ -105,19 +111,19 @@ fun MovieRow(onItemClick: (String) -> Unit = {}) {
             ) {
                 Column() {
                     AsyncImage(
-                        model = information.image,
+                        model = image,
                         contentDescription = "image",
                         modifier = Modifier.size(width = 160.dp, height = 80.dp),
                         contentScale = ContentScale.FillBounds
                     )
                     textStyled(
-                        text = information.title,
+                        text = title,
                         color = Color.Black,
                         style = MaterialTheme.typography.body1,
                         modifier = Modifier.padding(3.dp)
                     )
                     Text(
-                        text = information.detail,
+                        text = drama,
                         color = Color.Black,
                         style = MaterialTheme.typography.body2,
                         modifier = Modifier.padding(3.dp),

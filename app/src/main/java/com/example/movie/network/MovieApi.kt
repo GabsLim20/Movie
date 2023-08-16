@@ -3,26 +3,17 @@ package com.example.movie.network
 import com.example.movie.model.Movie
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Headers
 import retrofit2.http.Path
+import retrofit2.http.Query
 import javax.inject.Singleton
 
-@Singleton
 interface MovieApi {
     @GET("{movie_id}")
-    suspend fun getInformationMovie(
-        @Path("movie_id") movieId: Int
+     fun getInformationMovie(
+        @Path("movie_id") movieId: String,
+        @Query("api_key") apikey: String
     ): Call<Movie>
 
-    //@GET("pokemon/")
-    //    fun requestPokemon(): Call<PokemonListResponse>
-    //
-    //    @GET("pokemon/{namePokemon}/")
-    //    fun requestDetailPokemon(
-    //        @Path("namePokemon") namePokemon: String
-    //    ): Call<PokemonDetailResponse>
-    //
-    //    @GET("characteristic/{idPokemon}/")
-    //    fun requestDescriptionPokemon(
-    //        @Path("idPokemon") idPokemon: String
-    //    ): Call<PokemonDescriptionResponse>
+
 }

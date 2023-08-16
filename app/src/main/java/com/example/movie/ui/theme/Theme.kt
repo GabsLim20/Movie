@@ -67,7 +67,7 @@ fun MovieTheme(
     }
 
     MaterialTheme(
-        colors = colors,
+colors = colors,
         typography = Typography,
         content = content
     )
