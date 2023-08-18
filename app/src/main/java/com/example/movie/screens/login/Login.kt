@@ -101,7 +101,7 @@ fun UserFormAndSubmit(menuNavController: NavController) {
         Button(
             onClick = {
                 if (user.isNotEmpty() && password.isNotEmpty()) {
-                    menuNavController.navigate(Screens.HOME)
+
                 } else{ error = "Datos vacíos" }
             },
             modifier = Modifier

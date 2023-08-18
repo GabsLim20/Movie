@@ -6,9 +6,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.movie.screens.Splash
-import com.example.movie.screens.home.Home
+import com.example.movie.screens.home.MovieHome
 import com.example.movie.screens.login.Login
-import com.example.movie.screens.login.UserFormAndSubmit
 
 @Composable
 fun Navigation(menuNavController: NavController){
@@ -21,7 +20,7 @@ fun Navigation(menuNavController: NavController){
             Login(menuNavController)
         }
         composable(Screens.HOME){
-            Home(menuNavController)
+            MovieHome(menuNavController)
         }
     }
 

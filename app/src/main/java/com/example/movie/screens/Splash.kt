@@ -30,7 +30,7 @@ fun Splash(menuNavController: NavHostController) {
     val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.animation))
     LaunchedEffect(true) {
         delay(3000) // Retraso de 3 segundos antes de la navegación
-        menuNavController.navigate(Screens.LOGIN)
+        menuNavController.navigate(Screens.HOME)
     }
     Surface(modifier = Modifier.fillMaxWidth(), color = Color.Black) {
     Column(

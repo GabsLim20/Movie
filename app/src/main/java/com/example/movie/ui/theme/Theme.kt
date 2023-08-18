@@ -57,7 +57,6 @@ fun MovieTheme(
         else -> LightColorScheme
     }
     val view = LocalView.current
-    val colors = lightColors()
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
@@ -67,7 +66,7 @@ fun MovieTheme(
     }
 
     MaterialTheme(
-colors = colors,
+        colors = lightColors(),
         typography = Typography,
         content = content
     )

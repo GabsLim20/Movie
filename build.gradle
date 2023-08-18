@@ -4,6 +4,7 @@ buildscript {
         compose_version = '1.0.4'
         vHilt = '2.42'
         vSetImage = '2.4.0'
+        vPager = '0.28.0'
     }
     repositories {
         google()
